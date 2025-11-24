@@ -1,0 +1,132 @@
+.book-wrapper {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: url("../public/login-bg.webp") center/cover no-repeat;
+  backdrop-filter: blur(3px);
+}
+
+.book-card {
+  width: 90%;
+  max-width: 990px;
+  height: 620px;
+  background: #f6eee4;
+  border-radius: 18px;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+}
+
+.book-left {
+  flex: 1.2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f6eee4;
+}
+
+.nx-left-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.nx-left-subtitle {
+  font-size: 28px;
+  color: #6b4e3d;
+  font-weight: 500;
+  margin-top: 20px;
+  text-align: center;
+  opacity: 0.9;
+  letter-spacing: 0.5px;
+}
+
+.book-logo {
+  width: 260px;
+  opacity: 0.9;
+}
+
+.book-spine {
+  width: 4px;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.15), rgba(0,0,0,0.35));
+  box-shadow: 0 0 20px rgba(0,0,0,0.25);
+}
+
+.book-right {
+  flex: 1;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.book-title {
+  font-size: 32px;
+  margin-bottom: 26px;
+  color: #3b2d23;
+  font-weight: 700;
+}
+
+.book-form .book-input {
+  width: 100%;
+  padding: 16px;
+  font-size: 17px;
+  margin-bottom: 14px;
+  border-radius: 10px;
+  border: 1px solid #d4c8bc;
+  background: white;
+  display: block;
+  box-sizing: border-box;
+}
+
+.book-forgot {
+  font-size: 14px;
+  color: #6b4e3d;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 20px;
+  text-align: right;
+}
+
+.login-msg {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.login-msg.error {
+  color: red;
+}
+
+.login-msg.success {
+  color: green;
+}
+
+.book-btn {
+  width: 100%;
+  padding: 14px;
+  background: #6b4e3d;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.book-btn:hover {
+  background: #513a2e;
+}
+
+.book-signup {
+  margin-top: 18px;
+  font-size: 14px;
+  text-align: center;
+  color: #3b2d23;
+}
+
+.book-signup a {
+  color: #6b4e3d;
+  text-decoration: none;
+}

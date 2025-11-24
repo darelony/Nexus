@@ -1,0 +1,134 @@
+:root {
+  --brown: #6b4e3d;
+  --accent: #e07a2b;
+  --bg: #fbf7f4;
+  --sidebar-gradient: linear-gradient(180deg, #6b4e3d, #e07a2b);
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+}
+
+.admin-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ===================== Sidebar ===================== */
+.admin-sidebar {
+  width: 260px;
+  background: var(--sidebar-gradient);
+  color: #fff;
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+}
+
+.admin-sidebar h2 {
+  font-size: 26px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: 700;
+  color: #fff;
+}
+
+.admin-sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.admin-sidebar li {
+  padding: 14px 12px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.admin-sidebar li .icon {
+  margin-right: 12px;
+  font-size: 18px;
+}
+
+.admin-sidebar li:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateX(5px);
+}
+
+.admin-sidebar li.active {
+  background: rgba(255, 255, 255, 0.25);
+  font-weight: 600;
+}
+
+/* ===================== Main content ===================== */
+.admin-content {
+  flex: 1;
+  padding: 40px;
+}
+
+header h1 {
+  color: var(--brown);
+  margin: 0 0 8px 0;
+  font-weight: 700;
+}
+
+header p {
+  color: #555;
+  margin: 0 0 20px 0;
+}
+
+/* ===================== Cards ===================== */
+.admin-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.admin-card {
+  background: white;
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.admin-card:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* ===================== Responsive ===================== */
+@media (max-width: 900px) {
+  .admin-container {
+    flex-direction: column;
+  }
+
+  .admin-sidebar {
+    width: 100%;
+    flex-direction: row;
+    overflow-x: auto;
+    padding: 15px;
+  }
+
+  .admin-sidebar ul {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .admin-sidebar li {
+    margin-right: 12px;
+  }
+
+  .admin-content {
+    padding: 20px;
+  }
+}
