@@ -1,7 +1,7 @@
 // seedUsers.js
 const bcrypt = require("bcrypt");
-const sequelize = require("./config/db"); // putanja do db.js
-const User = require("./models/User");    // putanja do User.js
+const sequelize = require("../config/db"); // putanja do db.js
+const User = require("../models/User");    // putanja do User.js
 
 async function seedUsers() {
   try {

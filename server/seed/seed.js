@@ -1,4 +1,4 @@
-const { User, Course, Enrollment } = require("./models");
+const { User, Course, Enrollment } = require("../models");
 
 (async () => {
   try {

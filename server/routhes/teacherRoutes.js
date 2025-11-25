@@ -1,7 +1,7 @@
 const express = require("express");
-const Material = require("../models/Material");
-const ExamApplication = require("../models/ExamApplication");
-const Grade = require("../models/Grade");
+const Material = require("../../models/Material");
+const ExamApplication = require("../../models/ExamApplication");
+const Grade = require("../../models/Grade");
 const router = express.Router();
 
 router.post("/materials", async (req, res) => {
