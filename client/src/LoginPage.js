@@ -1,118 +1,114 @@
+// src/LoginPage.js
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./LoginPage.css";
 
 export default function LoginPage() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [msg, setMsg] = useState("");
-  const [loading, setLoading] = useState(false);
+const [username, setUsername] = useState("");
+const [password, setPassword] = useState("");
+const [msg, setMsg] = useState("");
+const [loading, setLoading] = useState(false);
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    setMsg("");        
-    setLoading(true);  
+const navigate = useNavigate();
 
-    try {
-      const res = await fetch("http://localhost:5000/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
-      });
+const handleLogin = async (e) => {
+e.preventDefault();
+setMsg("");
+setLoading(true);
 
-      const data = await res.json();
-      setLoading(false);
 
-      if (!res.ok) {
-        
-        setMsg(data.error || "Login failed");
-        return;
-      }
+try {
+  const res = await fetch("http://localhost:5000/api/auth/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ username, password }),
+  });
 
-      
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("role", data.role);
-      setMsg("Login successful!");
+  const data = await res.json();
+  setLoading(false);
 
-      
-      setTimeout(() => {
-       if (data.role === "admin") {
-    window.location.href = "/admin";
-      } else if (data.role === "student") {
-    window.location.href = "/student";
-      } else if (data.role === "teacher") {
-    window.location.href = "/teacher";
-      } else {
-    window.location.href = "/";
+  if (!res.ok) {
+    setMsg(data.error || "Login failed");
+    return;
   }
-}, 1000);
 
-    } catch (error) {
-      console.error(error);
-      setLoading(false);
-      setMsg("Server error");
+  // Čuvanje tokena i role
+  localStorage.setItem("token", data.token);
+  localStorage.setItem("role", data.role);
+  setMsg("Login successful!");
+
+  // Navigacija na dashboard bez reload-a
+  setTimeout(() => {
+    if (data.role === "admin") {
+      navigate("/admin");
+    } else if (data.role === "student") {
+      navigate("/student");
+    } else if (data.role === "teacher") {
+      navigate("/teacher");
+    } else {
+      navigate("/");
     }
-  };
+  }, 500);
 
-  return (
-    <div className="book-wrapper">
-      <div className="book-card">
+} catch (error) {
+  console.error(error);
+  setLoading(false);
+  setMsg("Server error");
+}
 
-        {/* LEFT PAGE */}
-        <div className="book-left">
-          <div className="nx-left-inner">
-            <img src="/logo.png" alt="Nexus University" className="book-logo" />
-            <p className="nx-left-subtitle">
-              Where knowledge becomes legacy
-            </p>
-          </div>
-        </div>
 
-        {/* BOOK SPINE */}
-        <div className="book-spine"></div>
+};
 
-        {/* RIGHT PAGE */}
-        <div className="book-right">
-          <h2 className="book-title">Login</h2>
+return ( <div className="book-wrapper"> <div className="book-card">
 
-          <form className="book-form" onSubmit={handleLogin}>
-            <input
-              type="text"
-              placeholder="Username"
-              className="book-input"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-            />
 
-            <input
-              type="password"
-              placeholder="Password"
-              className="book-input"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-
-            <a href="/forgot-password" className="book-forgot">
-              Forgot password?
-            </a>
-
-            <button className="book-btn" type="submit" disabled={loading}>
-              {loading ? "Logging in..." : "Login"}
-            </button>
-          </form>
-
-          {msg && (
-            <p
-              className={`login-msg ${
-                msg.toLowerCase().includes("successful") ? "success" : "error"
-              }`}
-            >
-              {msg}
-            </p>
-          )}
-        </div>
+    {/* LEFT PAGE */}
+    <div className="book-left">
+      <div className="nx-left-inner">
+        <img src="/logo.png" alt="Nexus University" className="book-logo" />
+        <p className="nx-left-subtitle">Where knowledge becomes legacy</p>
       </div>
     </div>
-  );
+
+    {/* BOOK SPINE */}
+    <div className="book-spine"></div>
+
+    {/* RIGHT PAGE */}
+    <div className="book-right">
+      <h2 className="book-title">Login</h2>
+
+      <form className="book-form" onSubmit={handleLogin}>
+        <input
+          type="text"
+          placeholder="Username"
+          className="book-input"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          className="book-input"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <a href="/forgot-password" className="book-forgot">Forgot password?</a>
+        <button className="book-btn" type="submit" disabled={loading}>
+          {loading ? "Logging in..." : "Login"}
+        </button>
+      </form>
+
+      {msg && (
+        <p className={`login-msg ${msg.toLowerCase().includes("successful") ? "success" : "error"}`}>
+          {msg}
+        </p>
+      )}
+    </div>
+  </div>
+</div>
+
+
+);
 }
