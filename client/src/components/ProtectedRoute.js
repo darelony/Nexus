@@ -1,20 +1,16 @@
-// src/ProtectedRoute.js
-import React from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
+import useAuth from "./hooks/useAuth";
 
 export default function ProtectedRoute({ children, allowedRoles }) {
-const token = localStorage.getItem("token");
-const userRole = localStorage.getItem("role");
+  const { user, isLoading } = useAuth();
+  const location = useLocation();
 
-// Ako nema tokena -> redirektuj na login
-if (!token) {
-return <Navigate to="/login" replace />;
-}
+  if (isLoading) return <p style={{ textAlign: "center" }}>Loading...</p>;
 
-// Ako token postoji ali rola nije dozvoljena -> redirektuj na login
-if (allowedRoles && !allowedRoles.includes(userRole)) {
-return <Navigate to="/login" replace />;
-}
+  if (!user) return <Navigate to="/login" replace state={{ from: location }} />;
 
-return children;
-}
+  if (allowedRoles && !allowedRoles.includes(user.role))
+    return <Navigate to="/unauthorized" replace />;
+
+  return children;
+};
